@@ -20,7 +20,7 @@ Hot tier untuk data terbaru, menangani operasi writes dan reads pada Hot nodes.
 Cold tier memberikan hardware yang lebih efisiend dalam biaya untuk meng-hosting data yang kurang banyak diakses (data lama). Merupakan sebuah opsi yang budget-friendly yang tidak perlu untuk menyimpan banyak salinan untuk data, memberikan kesempatan lebih untuk mengorganisir data.
 Kemudian, Elasticsearch memperkenalkan Frozen tier, memanfaatkan penyimpanan blob seperti AWS's S3 untuk menyimpan dan mengkueri data. Fitur ini, yang dikenal sebagai snapshot yang dapat dicari, tidak hanya menunjukkan keberhasilan tetapi juga memberikan kinerja yang sangat baik ketika Elasticsearch beroperasi.
 ## Konfigurasi
-# Nodes
+### Nodes
 pada Elasticsearch, sebuah 'Cluster' merupakan koleksi atau kumpulan dari satu atau lebih 'nodes' yang bekerja sama untuk memberikan kemampuan indexing dan search data yang tersimpan pada nodes.
 Beberapa key aspect pada Cluster Elasticsearch:
 - Nodes
