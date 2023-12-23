@@ -35,9 +35,9 @@ Shard dapat di replikasi kepada berbagai nodes untuk mentolerasi kesalahan dan  
 Replica berfungsi sebagai backup yang memberikan ketahanan terhadap kegagalan node.
 - Cluster Health
 Cluster health di representasikan dengan code warna, diantaranya:
-* Hijau: semua primary dan replica shard aktif
-* Kuning: semua primary shard aktif, namun beberapa replica menghilang atau tidak tersedia.
-* Merah: beberapa primary shard tidak aktif, pertanda data hilang pada shard tersebut.
+**** Hijau: semua primary dan replica shard aktif
+**** Kuning: semua primary shard aktif, namun beberapa replica menghilang atau tidak tersedia.
+**** Merah: beberapa primary shard tidak aktif, pertanda data hilang pada shard tersebut.
 - Discovery dan Node Communication
 Nodes pada cluster perlu untuk "menemukan" dan berkomunikasi satu sama lain. Elasticsearch memberikan beberapa cara discovery seperti unicast, multicast, atau cloud-based discovery agar nodes dapat menemukan dan bergabung dengan sebuah cluster
 - Scaling and Growth
@@ -46,13 +46,13 @@ Elasticsearch cluster dapat berkembang (scaled) dengan menambah jumlah nodes unt
 Dalam elastricsearch, sebuah 'node' merupakan satu instance dari service Elasticsearch yang sedang berjalan dalam suatu cluster. Nodes bertanggung jawab untuk menyimpan data, mengeksekusi query, dan berpartisipasi dalam cluster indexing dan kemampuan search.
 key aspect dalam node configuration:
 - Node Types
-* Master-eligible nodes: Nodes yang bertanggung jawab untuk actions yang kurang lebih satu level dengan cluster seperti mengatur metadata, membuat dan menghapus index, serta memilih cluster master node. Tidak semua node harus master-eligible.
-* Data Nodes: menyimpan data, mengeksekusi pencarian dan indexing requests, dan menangani query. nodes ini memengang shard dari data index.
-* Ingest Nodes: Node dimana ingest pipeline berjalan, memperbolehkan pre-processing dari documents sebelum peng-index-an
-* Client Nodes: Hanya mengalihkan atau memberikan jalan pada request kepada data node yang sesuai.
+** Master-eligible nodes: Nodes yang bertanggung jawab untuk actions yang kurang lebih satu level dengan cluster seperti mengatur metadata, membuat dan menghapus index, serta memilih cluster master node. Tidak semua node harus master-eligible.
+** Data Nodes: menyimpan data, mengeksekusi pencarian dan indexing requests, dan menangani query. nodes ini memengang shard dari data index.
+** Ingest Nodes: Node dimana ingest pipeline berjalan, memperbolehkan pre-processing dari documents sebelum peng-index-an
+** Client Nodes: Hanya mengalihkan atau memberikan jalan pada request kepada data node yang sesuai.
 - Node Settings
-* Node Name: Memberikan nama yang unique pada setiap node untuk membantu dalam mengindentifikasi dan mengatur node-node tersebut dalam suatu cluster
-* Roles: Node dapat memiliki roles berdasarkan tanggung jawab yang mereka pegang (Node type)
+** Node Name: Memberikan nama yang unique pada setiap node untuk membantu dalam mengindentifikasi dan mengatur node-node tersebut dalam suatu cluster
+** Roles: Node dapat memiliki roles berdasarkan tanggung jawab yang mereka pegang (Node type)
 - Hardware Resources
 Eleasticsearch dapat memakan banyak resource. Penyetelan CPU yang baik, memory, dan storage resource untuk nodes sangatlah penting untuk performa yang optimal. mengalokasikan heap memory untuk elasticsearch berdasarkan system memory yang tersedia sangatlah penting.
 - Networking Settings
