@@ -20,7 +20,7 @@ Hot tier untuk data terbaru, menangani operasi writes dan reads pada Hot nodes.
 Cold tier memberikan hardware yang lebih efisiend dalam biaya untuk meng-hosting data yang kurang banyak diakses (data lama). Merupakan sebuah opsi yang budget-friendly yang tidak perlu untuk menyimpan banyak salinan untuk data, memberikan kesempatan lebih untuk mengorganisir data.
 Kemudian, Elasticsearch memperkenalkan Frozen tier, memanfaatkan penyimpanan blob seperti AWS's S3 untuk menyimpan dan mengkueri data. Fitur ini, yang dikenal sebagai snapshot yang dapat dicari, tidak hanya menunjukkan keberhasilan tetapi juga memberikan kinerja yang sangat baik ketika Elasticsearch beroperasi.
 ## Konfigurasi
-### Nodes
+### Cluster
 pada Elasticsearch, sebuah 'Cluster' merupakan koleksi atau kumpulan dari satu atau lebih 'nodes' yang bekerja sama untuk memberikan kemampuan indexing dan search data yang tersimpan pada nodes.
 Beberapa key aspect pada Cluster Elasticsearch:
 - Nodes
@@ -35,10 +35,33 @@ Shard dapat di replikasi kepada berbagai nodes untuk mentolerasi kesalahan dan  
 Replica berfungsi sebagai backup yang memberikan ketahanan terhadap kegagalan node.
 - Cluster Health
 Cluster health di representasikan dengan code warna, diantaranya:
-Hijau: semua primary dan replica shard aktif
-Kuning: semua primary shard aktif, namun beberapa replica menghilang atau tidak tersedia.
-Merah: beberapa primary shard tidak aktif, pertanda data hilang pada shard tersebut.
+* Hijau: semua primary dan replica shard aktif
+* Kuning: semua primary shard aktif, namun beberapa replica menghilang atau tidak tersedia.
+* Merah: beberapa primary shard tidak aktif, pertanda data hilang pada shard tersebut.
 - Discovery dan Node Communication
 Nodes pada cluster perlu untuk "menemukan" dan berkomunikasi satu sama lain. Elasticsearch memberikan beberapa cara discovery seperti unicast, multicast, atau cloud-based discovery agar nodes dapat menemukan dan bergabung dengan sebuah cluster
 - Scaling and Growth
 Elasticsearch cluster dapat berkembang (scaled) dengan menambah jumlah nodes untuk mendistribusikan data dan beban kerja, meningkatkan performa dan kapasitas ketika data volumenya naik.
+### Nodes
+Dalam elastricsearch, sebuah 'node' merupakan satu instance dari service Elasticsearch yang sedang berjalan dalam suatu cluster. Nodes bertanggung jawab untuk menyimpan data, mengeksekusi query, dan berpartisipasi dalam cluster indexing dan kemampuan search.
+key aspect dalam node configuration:
+- Node Types
+* Master-eligible nodes: Nodes yang bertanggung jawab untuk actions yang kurang lebih satu level dengan cluster seperti mengatur metadata, membuat dan menghapus index, serta memilih cluster master node. Tidak semua node harus master-eligible.
+* Data Nodes: menyimpan data, mengeksekusi pencarian dan indexing requests, dan menangani query. nodes ini memengang shard dari data index.
+* Ingest Nodes: Node dimana ingest pipeline berjalan, memperbolehkan pre-processing dari documents sebelum peng-index-an
+* Client Nodes: Hanya mengalihkan atau memberikan jalan pada request kepada data node yang sesuai.
+- Node Settings
+* Node Name: Memberikan nama yang unique pada setiap node untuk membantu dalam mengindentifikasi dan mengatur node-node tersebut dalam suatu cluster
+* Roles: Node dapat memiliki roles berdasarkan tanggung jawab yang mereka pegang (Node type)
+- Hardware Resources
+Eleasticsearch dapat memakan banyak resource. Penyetelan CPU yang baik, memory, dan storage resource untuk nodes sangatlah penting untuk performa yang optimal. mengalokasikan heap memory untuk elasticsearch berdasarkan system memory yang tersedia sangatlah penting.
+- Networking Settings
+mengatur network setting untuk mengontrol bagaimana nodes berkominikasi dalam cluster, termasuk host binding, transport port, dan network publishing settings.
+- Discovery Settings
+Mengatur mekanisme discovery untuk memperboolehkan node untuk menemukan dan bergabung dalam cluster.
+- Node Attributes
+Memberikan custom attribute pada nodes dapat membantu dalam proses routing atau filtering.
+- Plugins and Modules
+Menghidupkan atau mematikan elasticsearch plugin dan modules pada setiap node berdasarkan pada kebutuhan.
+
+Node Configuration dapat dilakuan melalui Elasticsearch configuration files, environment variable, atau API calls.
