@@ -19,3 +19,26 @@ Pada lingkup produksi, data yang baru cenderung mendapatkan prioritas dibandingk
 Hot tier untuk data terbaru, menangani operasi writes dan reads pada Hot nodes.
 Cold tier memberikan hardware yang lebih efisiend dalam biaya untuk meng-hosting data yang kurang banyak diakses (data lama). Merupakan sebuah opsi yang budget-friendly yang tidak perlu untuk menyimpan banyak salinan untuk data, memberikan kesempatan lebih untuk mengorganisir data.
 Kemudian, Elasticsearch memperkenalkan Frozen tier, memanfaatkan penyimpanan blob seperti AWS's S3 untuk menyimpan dan mengkueri data. Fitur ini, yang dikenal sebagai snapshot yang dapat dicari, tidak hanya menunjukkan keberhasilan tetapi juga memberikan kinerja yang sangat baik ketika Elasticsearch beroperasi.
+## Konfigurasi
+# Nodes
+pada Elasticsearch, sebuah 'Cluster' merupakan koleksi atau kumpulan dari satu atau lebih 'nodes' yang bekerja sama untuk memberikan kemampuan indexing dan search data yang tersimpan pada nodes.
+Beberapa key aspect pada Cluster Elasticsearch:
+- Nodes
+individual instance dari elasticsearch yang sedang berjalan pada sebuah mesin atau server. Nodes pada Cluster berkomunikasi satu sama lain untuk berbagi data, mengeksekusi query, dan menjaga Cluster State.
+- Cluster State
+merupakan kumpulan informasi tentang keseluruhan cluster seperti index, mappings, shards, dan state dari setiap node. Cluster state dijaga dan di update oleh master-eligible nodes and sangat penting untuk suatu cluster agar berfungsi dengan baik.
+- Master Node
+dalam suatu cluster, satu atau lebih node di desain sebagain master-eligible nodes. Bertanggung jawab untuk mengatur Cluster State, koordinasi action seperti membuat atau menhapus index, menangani node yang bergabung atau meninggalkan cluster.
+- Sharding dan Replication
+Data pada elasticsearch dibagi menjadi unit yang lebih kecil yang bernama Shard. Setiap shard merupakan Lucene Index yang memegang sebagian porsi data.
+Shard dapat di replikasi kepada berbagai nodes untuk mentolerasi kesalahan dan  meningkatkan ketersediaan.
+Replica berfungsi sebagai backup yang memberikan ketahanan terhadap kegagalan node.
+- Cluster Health
+Cluster health di representasikan dengan code warna, diantaranya:
+Hijau: semua primary dan replica shard aktif
+Kuning: semua primary shard aktif, namun beberapa replica menghilang atau tidak tersedia.
+Merah: beberapa primary shard tidak aktif, pertanda data hilang pada shard tersebut.
+- Discovery dan Node Communication
+Nodes pada cluster perlu untuk "menemukan" dan berkomunikasi satu sama lain. Elasticsearch memberikan beberapa cara discovery seperti unicast, multicast, atau cloud-based discovery agar nodes dapat menemukan dan bergabung dengan sebuah cluster
+- Scaling and Growth
+Elasticsearch cluster dapat berkembang (scaled) dengan menambah jumlah nodes untuk mendistribusikan data dan beban kerja, meningkatkan performa dan kapasitas ketika data volumenya naik.
